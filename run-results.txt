@@ -1,0 +1,27 @@
+## Create square matrix
+> x<-matrix(1:4,2,2)
+> x
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+
+## Execute makeCacheMatrix function
+> m = makeCacheMatrix(x)
+> m$get()
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+
+## Execute cacheSolve without cache
+> cacheSolve(m)
+     [,1] [,2]
+[1,]   -2  1.5
+[2,]    1 -0.5
+
+## Execute cacheSolve with cache
+> cacheSolve(m)
+getting cached data.
+     [,1] [,2]
+[1,]   -2  1.5
+[2,]    1 -0.5
+> 
