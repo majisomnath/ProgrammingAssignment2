@@ -12,19 +12,25 @@
 #   2) get the value of the matrix
 #   3) set the value of inverse of the matrix
 #   4) get the value of inverse of the matrix
+
 makeCacheMatrix <- function(x = matrix()) {
+    ## initialize values
     invt <- NULL
     set <- function(y) {
+        ## set the values of parent environment
         x <<- y
         invt <<- NULL
     }
+    
     get <- function() x
-    setinverse <- function(inverse) invt <<- inverse
-    getinverse <- function() invt
+    ## set the inverse in parent environment
+    setInverse <- function(inverse) invt <<- inverse
+    getInverse <- function() invt
+    ## prepare a list
     list(set = set, 
          get = get, 
-         setinverse = setinverse, 
-         getinverse = getinverse)
+         setInverse = setInverse, 
+         getInverse = getInverse)
 }
 
 # The following function calculates the inverse of the special "matrix" 
@@ -34,13 +40,17 @@ makeCacheMatrix <- function(x = matrix()) {
 # in the cache via the setinverse function.
 
 cacheSolve <- function(x, ...) {
-    invt <- x$getinverse()
+    ## return a matrix which is inverse of x
+    invt <- x$getInverse()
+    
+    ## check if value already in cache, else make calculation
     if(!is.null(invt)) {
         message("getting cached data.")
         return(invt)
     }
     data <- x$get()
+    ## inverse using 'solve' function
     invt <- solve(data)
-    x$setinverse(invt)
+    x$setInverse(invt)
     invt
 }
